@@ -63,6 +63,10 @@ export const mutations = {
       state.list.push({ id, data })
     }
   },
+  // 日付順で並び替える
+  sort(state) {
+    state.list.sort((a, b) => new Date(b.data.timestamp) - new Date(a.data.timestamp))
+  },
   // 要素追加
   add(state, { id, data }) {
     state.list.push({ id, data })
@@ -74,6 +78,7 @@ export const mutations = {
   },
   // 要素リセット
   reset(state) {
+    sessionStorage.removeItem('markdownEditor')
     state.list = []
   },
 }
@@ -82,6 +87,8 @@ export const mutations = {
 export const actions = {
   // FireStoreに要素を保存する
   async saveDB(context, { saveId, saveData }) {
+    await context.commit('save', { id: saveId, data: saveData })
+    await context.commit('sort')
     const db = this.$fire.firestore.collection('markdowns').doc(saveId)
     try {
       await db.set({
@@ -92,17 +99,35 @@ export const actions = {
     } catch (e) {
       alert(e)
     }
-    context.commit('save', { id: saveId, data: saveData })
   },
   // FireStoreからデータを取得してリストを更新する
-  async readDb(context) {
+  readDB(context) {
+    // セッションテーブルに要素があればFireStoreにアクセスしない
+    // if (sessionStorage.getItem('markdownEditor')) return
+    // await context.commit('reset')
     const db = this.$fire.firestore.collection('markdowns').orderBy('timestamp', 'desc')
     try {
-      context.commit('reset')
-      const snapshot = await db.get()
-      snapshot.forEach((doc) => {
-        context.commit('add', { id: doc.id, data: doc.data() })
+      // const snapshot = await db.get()
+      // const snapshot = await db.onSnapshot()
+      // snapshot.docChanges().forEach((doc) => {
+      //   context.commit('add', { id: doc.id, data: doc.data() })
+      // })
+      db.onSnapshot(async (snapshot) => {
+        await context.commit('reset')
+        await snapshot.forEach((doc) => {
+          context.commit('add', { id: doc.id, data: doc.data() })
+        })
       })
+    } catch (e) {
+      alert(e)
+    }
+  },
+  // FireStoreの要素を削除する
+  async removeDB(context, removeId) {
+    await context.commit('remove', removeId)
+    const db = this.$fire.firestore.collection('markdowns').doc(removeId)
+    try {
+      db.delete()
     } catch (e) {
       alert(e)
     }

@@ -21,7 +21,7 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('memos/readDb')
+    this.$store.dispatch('memos/readDB')
   },
 }
 </script>

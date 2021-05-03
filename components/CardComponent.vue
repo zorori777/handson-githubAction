@@ -36,8 +36,8 @@ export default {
     },
     remove(id) {
       if (confirm('削除しますか？')) {
-        // store/memos.js/removeを実行
-        this.$store.commit('memos/remove', id)
+        // store/memos.js/removeDBを実行
+        this.$store.dispatch('memos/removeDB', id)
       }
     },
   },
