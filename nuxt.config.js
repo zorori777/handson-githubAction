@@ -45,7 +45,10 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ['@nuxtjs/dotenv', '@nuxtjs/firebase'],
+  modules: [
+    '@nuxtjs/dotenv',
+    '@nuxtjs/firebase', //firebase
+  ],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
@@ -69,6 +72,10 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 
+  generate: {
+    dir: 'public', // デフォルトは`dist`
+  },
+
   firebase: {
     config: {
       apiKey: process.env.API_KEY,
@@ -78,6 +85,10 @@ export default {
       messagingSenderId: process.env.MESSAGING_SENDER_ID,
       appId: process.env.APP_ID,
       measurementId: process.env.MESSAGING_SENDER_ID,
+    },
+    services: {
+      // auth: true // Just as example. Can be any other service.
+      firestore: true,
     },
   },
 }

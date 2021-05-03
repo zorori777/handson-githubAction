@@ -76,9 +76,18 @@ export const mutations = {
 
 // 非同期処理を実行する
 export const actions = {
-  // list更新＆DB通信を模して1秒待機
-  async saveLocalMemo(context, { newid, newdata }) {
-    context.commit('save', { id: newid, data: newdata })
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+  // FireStoreに要素を保存する
+  async saveDB(context, { saveId, saveData }) {
+    const db = this.$fire.firestore.collection('markdowns').doc(saveId)
+    try {
+      await db.set({
+        text: saveData.text,
+        title: saveData.title,
+        timestamp: saveData.timestamp,
+      })
+    } catch (e) {
+      alert(e)
+    }
+    context.commit('save', { id: saveId, data: saveData })
   },
 }

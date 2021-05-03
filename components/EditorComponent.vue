@@ -52,10 +52,10 @@ export default {
       const saveTitle = saveText.substring(0, saveText.indexOf('\n'))
       const saveTime = new Date().toLocaleString({ timeZone: 'Asia/Tokyo' })
       try {
-        // store/mamos.js/saveLocalMemoを実行
-        await this.$store.dispatch('memos/saveLocalMemo', {
-          newid: this.id,
-          newdata: {
+        // store/mamos.js/saveDBを実行
+        await this.$store.dispatch('memos/saveDB', {
+          saveId: this.id,
+          saveData: {
             text: saveText,
             title: saveTitle,
             timestamp: saveTime,
