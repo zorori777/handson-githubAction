@@ -13,15 +13,18 @@
 
 <script>
 export default {
+  // ページ読み込み時に毎回実行する処理
+  async fetch() {
+    // store/memos.js/readDB,listeDBを実行
+    await this.$store.dispatch('memos/readDB')
+    this.$store.dispatch('memos/listenDB')
+  },
   // 計算した値をとる変数
   computed: {
     memos() {
       // store/memos.js/listを取得
       return this.$store.state.memos.list
     },
-  },
-  created() {
-    this.$store.dispatch('memos/readDB')
   },
 }
 </script>
