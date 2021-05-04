@@ -88,10 +88,9 @@ export const actions = {
   // FireStoreに要素を保存する
   async saveDB(context, { saveId, saveData }) {
     await context.commit('save', { id: saveId, data: saveData })
-    await context.commit('sort')
     const db = this.$fire.firestore.collection('markdowns').doc(saveId)
     try {
-      await db.set({
+      db.set({
         text: saveData.text,
         title: saveData.title,
         timestamp: saveData.timestamp,
@@ -102,16 +101,8 @@ export const actions = {
   },
   // FireStoreからデータを取得してリストを更新する
   readDB(context) {
-    // セッションテーブルに要素があればFireStoreにアクセスしない
-    // if (sessionStorage.getItem('markdownEditor')) return
-    // await context.commit('reset')
     const db = this.$fire.firestore.collection('markdowns').orderBy('timestamp', 'desc')
     try {
-      // const snapshot = await db.get()
-      // const snapshot = await db.onSnapshot()
-      // snapshot.docChanges().forEach((doc) => {
-      //   context.commit('add', { id: doc.id, data: doc.data() })
-      // })
       db.onSnapshot(async (snapshot) => {
         await context.commit('reset')
         await snapshot.forEach((doc) => {
