@@ -107,6 +107,7 @@ export const actions = {
       })
     } catch (e) {
       alert(e)
+      // test
     }
   },
   // FireStoreの要素を削除する
