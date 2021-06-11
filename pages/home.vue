@@ -6,7 +6,7 @@
         &#8220;NO CLOUD, NO LIFE&#8221;
         <footer>
           <small>
-            <em>&mdash;by MarkingCloud</em>
+            <em>&mdash;by MarkingCloudTest</em>
           </small>
         </footer>
       </blockquote>
