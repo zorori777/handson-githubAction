@@ -6,7 +6,7 @@
         &#8220;NO CLOUD, NO LIFE&#8221;
         <footer>
           <small>
-            エラー原因の一文
+            <>エラー原因の一文
             <em>&mdash;by MarkingCloud</em>
           </small>
         </footer>
