@@ -1,0 +1,6 @@
+tasks:
+  - init: nvm install v14.15.0 && nvm use v14.15.0 && npm install && npm install -g firebase-tools
+
+vscode:
+  extensions:
+    - octref.vetur
