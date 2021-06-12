@@ -6,7 +6,8 @@
         &#8220;NO CLOUD, NO LIFE&#8221;
         <footer>
           <small>
-            <em>&mdash;by MarkingCloudTest</em>
+            エラー原因の一文
+            <em>&mdash;by MarkingCloud</em>
           </small>
         </footer>
       </blockquote>
