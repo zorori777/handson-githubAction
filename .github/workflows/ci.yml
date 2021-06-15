@@ -23,7 +23,11 @@ jobs:
           npx eslint "pages/*.vue"
           npx eslint "components/*.vue"
           npx eslint "store/*.js"
-    
+
+      - name: prettier
+        run: |
+          npx prettier --write "pages/*.vue"
+
       - name: generate
         run: npm run generate
 
