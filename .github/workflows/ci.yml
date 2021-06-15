@@ -18,14 +18,14 @@ jobs:
       - name: npm install
         run: npm install
 
-    #   - name: eslint
-    #     run: |
-    #       npx eslint "pages/*.vue"
-    #       npx eslint "components/*.vue"
-    #       npx eslint "store/*.js"
-    #
-    #   - name: generate
-    #     run: npm run generate
+      - name: eslint
+        run: |
+          npx eslint "pages/*.vue"
+          npx eslint "components/*.vue"
+          npx eslint "store/*.js"
+    
+      - name: generate
+        run: npm run generate
 
     #   - name: deploy
     #     run: |
