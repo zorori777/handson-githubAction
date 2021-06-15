@@ -27,7 +27,7 @@ jobs:
       - name: generate
         run: npm run generate
 
-    #   - name: deploy
-    #     run: |
-    #       npx firebase use ${{ secrets.FIREBASE_PROJECT }} --token=${{ secrets.FIREBASE_TOKEN }}
-    #       npx firebase deploy --only hosting --token=${{ secrets.FIREBASE_TOKEN }}
+      - name: deploy
+        run: |
+          npx firebase use ${{ secrets.FIREBASE_PROJECT }} --token=${{ secrets.FIREBASE_TOKEN }}
+          npx firebase deploy --only hosting --token=${{ secrets.FIREBASE_TOKEN }}
